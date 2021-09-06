@@ -1,5 +1,9 @@
 1)It reduces clutter, instead of having to keep track of several copies of the same file you can simple roll back to a previous versions should something go wrong.
 
-2)It's a more accessible resource when working with a team or when someone else needs to view your work, instead of having to email the files or otherwise share them, your teammate, or in this case the teacher/TA, can simlpy pull the directory.
+2)It's a more accessible resource when working with a team or when someone else needs to view your work, instead of having to email the files or otherwise share them, your teammate, or in this case the teacher/TA, can simply pull the directory.
 
 3)It's industry standard and learning it is a valubale skill we can use long after we graduate.
+
+4)It's more secure, storing files on the cloud insures their preservation should a computer meet its untimely demise.
+
+5)It creates a timeline, it's a lot easy to track feature development, amount of work done, and how long the project has been in development in general with vcs.
