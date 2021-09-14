@@ -17,6 +17,7 @@
 int main(int argc, char *argv[]){
     //int input;
     FILE *file;
+    //see if program is supplied a test file
     bool isDemo = false;
     if(argc > 1){
         isDemo = true;
@@ -26,7 +27,6 @@ int main(int argc, char *argv[]){
         }
         
     }
-    //FILE *file;
     int boardSize;
     char** board;
     char input [10];
@@ -74,13 +74,14 @@ int main(int argc, char *argv[]){
     struct ship carrier = createCar();
     struct ship frig1 = createFr();
     struct ship frig2 = createFr();
-
+    //if no file is supplied then ships are added manually
     if(!isDemo){
         addShip(carrier, boardSize, board);
         addShip(bs, boardSize, board);
         addShip(frig1, boardSize, board);
         addShip(frig2, boardSize, board);
     }else{
+        // demo file was supplied so ship placement is read in
         char fileIn [100];
         int row, col;
         char colAlpha, type, rotate;
@@ -176,6 +177,7 @@ int main(int argc, char *argv[]){
 
     char again;
     inputPass = false;
+    printBoard(board, boardSize);
     deleteBoard(board, boardSize);
     while(!inputPass){
         printf("Game Over! your wins : %d \n Play again?(y/n): ", wins);
