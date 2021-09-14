@@ -16,14 +16,14 @@ HEADERS=ship.h board.h
 OBJECTS=frigate.o
 
 # The final program to build
-EXECUTABLE=Frigate
+EXECUTABLE=frigate
 
 # --------------------------------------------
 
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXECUTABLE)
+	$(CC) $(OBJECTS) -o $(EXECUTABLE) -lm
 
 %.o: %.c $(HEADERS) 
 	$(CC) $(CFLAGS) -o $@ $< -std=c99 
