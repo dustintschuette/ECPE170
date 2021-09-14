@@ -97,6 +97,7 @@ int main(int argc, char *argv[]){
                     vert = false;
                 }
                 col = (int) colAlpha - 'a';
+                row = row-1;
                 addDemoShip(board, type, vert, row, col);
 
             }

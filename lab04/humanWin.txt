@@ -6,12 +6,15 @@ c2
 c3
 c4
 c5
+c6
 d1
 1e
 1f
 12e
+g1
 g2
-g3
+h3
 g6
 g7
+g3
 n
