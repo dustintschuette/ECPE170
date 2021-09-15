@@ -131,8 +131,11 @@ int main(int argc, char *argv[]){
                 for (int c; (c = getchar()) != EOF && c != '\n';)
                     ;
             }
-            sscanf(input, " %c%d",&colAlpha, &row);
-            if(row == 25){
+            
+            
+            if(isalpha(input[0])){
+                sscanf(input, " %c%d", &colAlpha, &row);
+            }else{
                 sscanf(input, " %d%c", &row, &colAlpha);
             }
 

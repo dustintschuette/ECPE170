@@ -108,11 +108,11 @@ bool addToBoard(char** board, int row, int col, int size, bool vert, char tile){
     }
     for(int i = 0; i < size; i++){
         if(vert){
-            printf("ship added at %d ,%d tile : %c\n", row + i, col, tile);
+            //printf("ship added at %d ,%d tile : %c\n", row + i, col, tile);
             board[row+i][col] = tile;
 
         }else{
-            printf("ship added at %d ,%d tile : %c \n", row , col+ i, tile);
+            //printf("ship added at %d ,%d tile : %c \n", row , col+ i, tile);
             board[row][col+i] = tile;
 
         }
@@ -137,13 +137,13 @@ void addDemoShip(char** board, char type, bool vert, int row, int col){
     for(int i = 0; i < size; i++){
         if(vert){
             //up/down
-            board[row + i][col] = type;
+            board[row][col + i] = type;
             printf("ship added at %d ,%d tile : %c\n", row + i, col, type);
 
         }else{
             //left/right
              printf("ship added at %d ,%d tile : %c \n", row , col+ i, type);
-            board[row][col + i] = type;
+            board[row + i][col] = type;
 
         }
     }
