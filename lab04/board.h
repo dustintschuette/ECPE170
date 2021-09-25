@@ -138,11 +138,11 @@ void addDemoShip(char** board, char type, bool vert, int row, int col){
         if(vert){
             //up/down
             board[row][col + i] = type;
-            printf("ship added at %d ,%d tile : %c\n", row + i, col, type);
+            //printf("ship added at %d ,%d tile : %c\n", row + i, col, type);
 
         }else{
             //left/right
-             printf("ship added at %d ,%d tile : %c \n", row , col+ i, type);
+           //  printf("ship added at %d ,%d tile : %c \n", row , col+ i, type);
             board[row + i][col] = type;
 
         }

@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
 
 
     //make the board
-    printf("size: %u\n", boardSize);
+    //printf("size: %u\n", boardSize);
     board = initBoard(boardSize);
     
     //initialize number of shots
@@ -165,7 +165,7 @@ int main(int argc, char *argv[]){
         }else{
             printf("You've already shot here! Pick another tile!\n");
         }
-        printf("Score : %d carrier hits, %d battleship hits, %d frigate hits \n", scoreBoard->cHits, scoreBoard->bHits, scoreBoard->fHits);
+        //printf("Score : %d carrier hits, %d battleship hits, %d frigate hits \n", scoreBoard->cHits, scoreBoard->bHits, scoreBoard->fHits);
         if(checkWin(scoreBoard, board, boardSize)){
             gameOver = true;
             printf("You Win! \n");
