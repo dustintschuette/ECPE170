@@ -60,19 +60,20 @@ bool verifySort(int *array_start, int array_size)
 {
   printf("Verifying array sorting...\n");
 
-  if(array_size == 1)
+  if(array_size == 1){
     return true;  // Array with 1 element is always sorted
-  else if(array_size <= 0)
+  }else if(array_size <= 0){
     return false;  // Invalid array
-  else
-    {
-      for(int i=1; i<array_size; i++)
-	{
+  }else{
+      for(int i=1; i<array_size; i++){
 	  // Starting from element 1 (not 0), compare with preceeding
-	  if(array_start[i-1] > array_start[i])
+	  if(array_start[i-1] > array_start[i]){
+    printf("test failed at: %d, %d, index: %d \n", array_start[i-1], array_start[i], i);
 	    return false; // Found 1 example out of order - stop searching
-	}
+	  }
 
-      return true;
+      
     }
+    return true;
+  }
 }

@@ -88,28 +88,90 @@ void mergeSort_merge(int array_start[], int temp[], int left, int mid, int right
 //2. Once binary tree is constructed, perform in-order traversal of the binary tree (HINT: use recursion).
 //FILL in the functions: inorder, insert_element, and tree_sort for sorting.
 
-void inorder(struct BTreeNode *node,int *array)
+void inorder(struct BTreeNode *node,int *array, int* index)
 {
 	//Recursive In-order traversal: leftchild, element, rightchild
+  if(node == NULL){
+    return;
+  }
+  inorder(node->leftnode, array, index);
+  //printf("index : %d  is %d, ", *index,  node->element );
+  array[*index] = node->element;
+  *index = *index + 1;
+  //printf("current index : %d, next index: %d\n", *index -1 , *index);
+  //index = &temp;
+  inorder(node->rightnode, array , index);
+
+
 
 }
 
 void insert_element(struct BTreeNode **node, int element)
 {
+  //printf("insert element called, node element: %d, element to insert: %d \n", (*node)->element, element);
+ 
+ 
+ if(element < ((*node)->element)){
+    if((*node)->leftnode == NULL){
+      (*node)->leftnode = malloc ( sizeof ( struct BTreeNode ) ) ;
+      (*node)->leftnode->element = element;
+      (*node)->leftnode->leftnode = NULL;
+      (*node)->leftnode->rightnode = NULL;
+     // printf("inserted into left node \n");
+    }else{
+      //printf("going left \n");
+      node = &((*node)->leftnode);
+      insert_element(node, element);
+      }
+  }else{
+    if((*node)->rightnode == NULL){
+      (*node)->rightnode = malloc ( sizeof ( struct BTreeNode ) ) ;
+      (*node)->rightnode->element = element;
+      (*node)->rightnode->leftnode = NULL;
+      (*node)->rightnode->rightnode = NULL;
+     // printf("inserted into right node \n");
+    }else{
+     // printf("going right \n");
+      node = &((*node)->rightnode);
+      insert_element(node, element);
+    }
 
+  }
+  
 }
 
-void free_btree(struct BTreeNode **node)
+void free_btree(struct BTreeNode **node, int size)
 {
-
+  
 }
 
 void tree_sort(int *array, int size)
 {
-
-//1. Construct the binary tree using elements in array
-//2. Traverse the binary tree in-order and update the array
-//3. Free the binary tree
+  struct BTreeNode ** tree;
+  struct BTreeNode* root;
+  struct BTreeNode temp;
+  temp.element = array[0];
+  temp.leftnode = NULL;
+  temp.rightnode = NULL;
+  root = &temp;
+  tree = &root;
+  printf("initializing tree index 0: %d \n", array[0]);
+  for(int i = 1; i < size; i++){
+    //printf("inserting Element \n");
+    insert_element(tree, array[i]);
+    tree = &root;
+  }
+  int * index = malloc(sizeof(int));
+  *index = 0;
+  printf("Tree complete \n");
+  inorder(root, array, index);
+  free_btree(tree, size);
+  
+  //1. Construct the binary tree using elements in array
+  //2. Traverse the binary tree in-order and update the array
+  //3. Free the binary tree
 }
+
+
 
 

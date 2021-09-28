@@ -13,7 +13,7 @@
 #include "helper_functions.h"
 #include "your_functions.h"
 
-#define ARRAY_SIZE 100000
+#define ARRAY_SIZE 25000
 
 int main(int argc, char *argv[])
 {
