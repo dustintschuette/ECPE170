@@ -6,6 +6,8 @@
 # Node artifact files
 node_modules/
 dist/
+/lab05/part5/
+*.~
 
 # Compiled Java class files
 *.class
