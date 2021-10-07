@@ -55,7 +55,7 @@ void printList(struct Node * head){
 
 void insert(struct Node* head, int index){
     struct Node * temp = head;
-    while(index > 1){
+    while(index > 2){
         if(temp->next == NULL){
             printf("error in insert, index given is out of bounds");
             return;
