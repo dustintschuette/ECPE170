@@ -7,22 +7,28 @@ struct Node {
     struct Node* next;
 
 };
+//creates List
 struct Node* createList(struct Node* head, int size);
+//prints list
 void printList(struct Node * head);
+//inserts a new element at this position
 void insert(struct Node* head, int index);
+//frees all nodes
 void freeList(struct Node* head);
 
 
 int main(){
 
     struct Node* head = calloc(10, sizeof(struct Node));
+    //struct Node* head;
+
     head->next = NULL;
     head->val = rand() %100;
 
     createList(head, 10);
     printList(head);
     insert(head, 6);
-    printf("Inserting a new element at index 6 \n \n");
+    printf("Inserting a new element as the 6th item \n \n");
     printList(head);
     freeList(head);
 
@@ -31,7 +37,7 @@ int main(){
 }
 //returns a new linked list of size number of elements when given the head of a linked list;
 struct Node* createList(struct Node* head, int size){
-        if(size == 0){
+        if(size < 2){
             return head;
         }
     head->next = calloc(1, sizeof(struct Node));
@@ -45,8 +51,8 @@ struct Node* createList(struct Node* head, int size){
 void printList(struct Node * head){
     struct Node * temp = head;
     int counter = 0;
-    while(temp->next != NULL){
-        printf("List at index %d is %d \n", counter, temp->val);
+    while(temp != NULL){
+        printf("List item %d is %d \n", counter+1, temp->val);
         counter++;
         temp = temp->next;
     }
