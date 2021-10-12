@@ -37,6 +37,15 @@ void combine2(vec_ptr v, data_t *dest)
   printf("Added optimization: Code motion\n");
 
   // XXX - STUDENT CODE GOES HERE - XXX
+  long int i;
+  *dest = IDENT;
+  int length = vec_length(v);
+  for(i=0; i < length; i++)
+    {
+      data_t val;
+      get_vec_element(v, i, &val);
+      *dest = *dest OP val;
+    }
 
 }
 
@@ -53,6 +62,15 @@ void combine3(vec_ptr v, data_t *dest)
   printf("Added optimization: Reducing procedure calls\n"); 
 
   // XXX - STUDENT CODE GOES HERE - XXX
+  *dest = IDENT;
+  long int i;
+  for(i=0; i < vec_length(v); i++)
+    {
+      data_t val;
+      val = v->data[i];
+      *dest = *dest OP val;
+    }
+  
 
 }
 
@@ -70,6 +88,15 @@ void combine4(vec_ptr v, data_t *dest)
   printf("Added optimization: Eliminating unneeded memory accesses\n");
 
   // XXX - STUDENT CODE GOES HERE - XXX
+  data_t x = 1;
+  long int i;
+  for(i=0; i < vec_length(v); i++)
+    {
+      data_t val;
+      get_vec_element(v, i, &val);
+      x = x * val;
+    }
+    *dest = x;
 
 }
 
@@ -82,6 +109,17 @@ void combine5x2(vec_ptr v, data_t *dest)
   printf("Added optimization: Loop unrolling x2\n");
 
   // XXX - STUDENT CODE GOES HERE - XXX
+  *dest = IDENT;
+  long int i;
+
+  for(i=0; i < vec_length(v); i = i + 2)
+    {
+      data_t val;
+      get_vec_element(v, i, &val);
+      *dest = *dest OP val;
+      get_vec_element(v, i + 1, &val);
+      *dest = *dest OP val;
+    }
 
 }
 
@@ -93,6 +131,17 @@ void combine5x3(vec_ptr v, data_t *dest)
   printf("Added optimization: Loop unrolling x3\n");
 
   // XXX - STUDENT CODE GOES HERE - XXX
+  long int i;
+  for(i=0; i < vec_length(v); i = i + 3)
+    {
+      data_t val;
+      get_vec_element(v, i, &val);
+      *dest = *dest OP val;
+      get_vec_element(v, i + 1, &val);
+      *dest = *dest OP val;
+      get_vec_element(v, i + 2, &val);
+      *dest = *dest OP val;
+    }
 
 }
 
@@ -104,5 +153,25 @@ void combine6(vec_ptr v, data_t *dest)
   printf("Added optimization: Loop unrolling x2, Parallelism x2\n");
 
   // XXX - STUDENT CODE GOES HERE - XXX
+  *dest = IDENT;
+  long int i;
+
+
+  for(i=0; i < vec_length(v); i = i + 4)
+    {
+      data_t val;
+      get_vec_element(v, i, &val);
+      *dest = *dest OP val;
+      get_vec_element(v, i + 1, &val);
+      *dest = *dest OP val;
+    }
+    for(i=2; i < vec_length(v); i = i + 4)
+    {
+      data_t val;
+      get_vec_element(v, i, &val);
+      *dest = *dest OP val;
+      get_vec_element(v, i + 1, &val);
+      *dest = *dest OP val;
+    }
 
 }
