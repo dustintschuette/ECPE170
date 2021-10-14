@@ -64,7 +64,8 @@ void combine3(vec_ptr v, data_t *dest)
   // XXX - STUDENT CODE GOES HERE - XXX
   *dest = IDENT;
   long int i;
-  for(i=0; i < vec_length(v); i++)
+  int length = vec_length(v);
+  for(i=0; i < length; i++)
     {
       data_t val;
       val = v->data[i];
@@ -90,11 +91,12 @@ void combine4(vec_ptr v, data_t *dest)
   // XXX - STUDENT CODE GOES HERE - XXX
   data_t x = 1;
   long int i;
-  for(i=0; i < vec_length(v); i++)
+  int length = vec_length(v);
+  for(i=0; i < length; i++)
     {
       data_t val;
-      get_vec_element(v, i, &val);
-      x = x * val;
+      val = v->data[i];
+      x = x  OP val;
     }
     *dest = x;
 
@@ -111,14 +113,16 @@ void combine5x2(vec_ptr v, data_t *dest)
   // XXX - STUDENT CODE GOES HERE - XXX
   *dest = IDENT;
   long int i;
+  int length = vec_length(v);
+  data_t x = 1;
 
-  for(i=0; i < vec_length(v); i = i + 2)
+  for(i=0; i < length ;i = i + 2)
     {
       data_t val;
-      get_vec_element(v, i, &val);
-      *dest = *dest OP val;
-      get_vec_element(v, i + 1, &val);
-      *dest = *dest OP val;
+      val = v->data[i];
+      x = x OP val;
+      val = v->data[i + 1];
+      x = x OP val;
     }
 
 }
@@ -132,16 +136,19 @@ void combine5x3(vec_ptr v, data_t *dest)
 
   // XXX - STUDENT CODE GOES HERE - XXX
   long int i;
-  for(i=0; i < vec_length(v); i = i + 3)
+  int length = vec_length(v);
+  data_t x = 1;
+  for(i=0; i < length; i = i + 3)
     {
       data_t val;
-      get_vec_element(v, i, &val);
-      *dest = *dest OP val;
-      get_vec_element(v, i + 1, &val);
-      *dest = *dest OP val;
-      get_vec_element(v, i + 2, &val);
-      *dest = *dest OP val;
+      val = v->data[i];
+      x = x OP val;
+      val = v->data[i + 1];
+      x = x OP val;
+      val = v->data[i + 2];
+      x = x OP val;
     }
+    *dest = x;
 
 }
 
@@ -155,23 +162,26 @@ void combine6(vec_ptr v, data_t *dest)
   // XXX - STUDENT CODE GOES HERE - XXX
   *dest = IDENT;
   long int i;
+  int length = vec_length(v);
+  data_t x = 1;
 
 
-  for(i=0; i < vec_length(v); i = i + 4)
+  for(i=0; i < (length /2); i = i + 2)
     {
       data_t val;
-      get_vec_element(v, i, &val);
-      *dest = *dest OP val;
-      get_vec_element(v, i + 1, &val);
-      *dest = *dest OP val;
+      val = v->data[i];
+      x = x OP val;
+      val = v->data[i+1];
+      x = x OP val;
     }
-    for(i=2; i < vec_length(v); i = i + 4)
+    for(i= (length/2); i < length; i = i + 2)
     {
       data_t val;
-      get_vec_element(v, i, &val);
-      *dest = *dest OP val;
-      get_vec_element(v, i + 1, &val);
-      *dest = *dest OP val;
+      val = v->data[i];
+      x = x OP val;
+      val = v->data[i + 1];
+      x = x  OP val;
     }
+    *dest = x;
 
 }
