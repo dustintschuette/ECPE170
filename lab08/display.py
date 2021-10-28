@@ -136,6 +136,7 @@ while data != b'':
 # *****************************
 
 splitData = fullData.split(b'\r\n\r\n')
+print(splitData[0])
 
 saved_filename = '/tmp/ecpe170picture'
 myFile = open(saved_filename, 'w+b')
