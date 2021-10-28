@@ -79,6 +79,9 @@ print("Preparing to download object from http://" + host + path + filename)
 #      to the server? (otherwise, the server won't begin processing)
 # *****************************
 
+lineFive = f"GET {path}{filename} HTTP/1.1\r\nHost: {host}\r\nConnection:close\r\n\r\n"
+print(lineFive)
+
 
 
 
@@ -92,8 +95,9 @@ print("Preparing to download object from http://" + host + path + filename)
 #      prior to transmitting it.
 # *****************************
 
-
-
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((host, port))
+s.sendall(bytes(lineFive,'ascii'))
 
 
 
@@ -110,6 +114,13 @@ print("Preparing to download object from http://" + host + path + filename)
 
 
 
+data = s.recv(max_recv)
+
+fullData = data
+
+while data != b'':
+    data = s.recv(max_recv)
+    fullData += data
 
 
 
@@ -124,6 +135,15 @@ print("Preparing to download object from http://" + host + path + filename)
 #      in the /tmp directory would be a great spot.
 # *****************************
 
+splitData = fullData.split(b'\r\n\r\n')
+
+saved_filename = '/tmp/ecpe170picture'
+myFile = open(saved_filename, 'w+b')
+
+myFile.write(splitData[1])
+myFile.close()
+
+
 
 
 
@@ -136,3 +156,4 @@ print("Preparing to download object from http://" + host + path + filename)
 # in the variable 'saved_filename', use the 'eog' utility to 
 # display the image on screen
 call(["eog", saved_filename])
+
