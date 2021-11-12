@@ -27,14 +27,14 @@ while: beq $t0, $zero, notfound	#main loop while a null char is not found
 	j while			#continue the loop				
 
 notfound:
-	# Print string msg2
+	# Print string msg2	#print msg2
 	li	$v0, 4
 	la	$a0, msg2
 	syscall
 	j exit
 	
 found: 
-	# Print string msg3
+	# Print string msg3	#print msg3
 	li	$v0, 4
 	la	$a0, msg3
 	syscall
