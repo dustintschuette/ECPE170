@@ -35,7 +35,7 @@ void printBoard(){
 int checkSpace(int lastSpace, int dx){
     int nextSpace = lastSpace;
     char player = board[lastSpace];
-    printf("Player: %c \n", player);
+    //printf("Player: %c \n", player);
     int counter = 0;
     while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player ){
         counter++;
@@ -136,7 +136,7 @@ int takeTurnC(){
         if(turn < 0){
             turn = turn * -1;
         }
-        turn = turn % 7;
+        turn = turn % 8;
         int turnHolder = turn;
         turn = checkMove(turn, 'C');
         if(turn != 0){
