@@ -21,7 +21,7 @@ main:
 	syscall
 
     # get in random2
-	li	$v0,5		# print_string syscall code = 4
+	li	$v0,5		# get int syscall code = 5
 	syscall
     sw $v0, m_z
 
@@ -334,20 +334,30 @@ checkWin:
 #t4 = index of nextSpace
 #t5 = counter
 #t6 = value of board[nextSpace]
+#t7 = col start to check for wrapping
+#t8 = col start for countdown wrap
 checkSpace:
     li $v0, 0               #default return value
     la $t0, board
     add $t1, $t0, $a0       #get board[lastSpace]
     lb $t2, 0($t1)         #load board[lastSpace] 
     move $t4, $a0           #index of nextSpace
+
+    li $t5, 7               #load 7 for div to get col start
+    div $a0, $t5
+    mfhi $t7                #starting col for count up
+    move $t8, $t7           #starting col for count down
+    
     
     li $t5, 1               #counter starts at 1
     move $t3, $t1           
 
     checkSpaceLoop1:
+        addi $t7, $t7, 1        #move up one to start loop
         add $t4, $t4, $a1       #move up index nextSpace
         add $t3, $t3, $a1       #address of next space to check
         #check if index is out of bounds
+        bgt $t7, 6, preloop2
         blt $t4, 0, preloop2
         bgt $t4, 53, preloop2
         #if not then see if the space is the same as the players
@@ -363,9 +373,11 @@ checkSpace:
         move $t4, $a0           #reset index of nextSpace
         
     checkSpaceLoop2:
+        addi $t7, $t7, -1        #move up one to start loop
         sub $t4, $t4, $a1       #move up index nextSpace
         sub $t3, $t3, $a1       #nextSpace going opposite direction now
         #check if index is out of bounds
+        blt $t8, 0, checkSpaceEnd
         blt $t4, 0, checkSpaceEnd
         bgt $t4, 53, checkSpaceEnd
         #if not then see if the space is the same as the players
