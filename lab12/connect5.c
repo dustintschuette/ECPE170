@@ -40,12 +40,18 @@ int checkSpace(int lastSpace, int dx){
     //printf("Player: %c \n", player);
     int nextCol = col + 1;
     int counter = 0;
+    if(dx == 9){
+        col = 0;
+    }
     while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player && nextCol < 9){
         counter++;
         nextSpace += dx;
     }
     col = col -1;
     nextSpace = lastSpace - dx;
+    if(dx == 9){
+        col = 8;
+    }
     while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player && col > -1){
         counter++;
         nextSpace -= dx;
@@ -62,15 +68,15 @@ int checkSpace(int lastSpace, int dx){
 int checkWin(int lastSpace){
     
     //up left
-    if(checkSpace(lastSpace, -10)){
+    if(checkSpace(lastSpace, 10)){
         return 1;
     }
     //up
-    if(checkSpace(lastSpace, -9)){
+    if(checkSpace(lastSpace, 9)){
         return 1;
     }
     //up right
-    if(checkSpace(lastSpace, 8)){
+    if(checkSpace(lastSpace, -8)){
         return 1;
     }
     //left 

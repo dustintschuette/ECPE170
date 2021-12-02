@@ -313,7 +313,7 @@ checkWin:
     li $a1, 9              #check up/down
     jal checkSpace
 
-    li $a1, 8               #check up right diagonal
+    li $a1, -8               #check up right diagonal
     jal checkSpace
 
     li $a1, 1               #check left/right
@@ -350,7 +350,13 @@ checkSpace:
     
     
     li $t5, 1               #counter starts at 1
-    move $t3, $t1           
+    move $t3, $t1   
+    beq $a0, 9, vert        #col checker isnt necessary for vertical         
+    j checkSpaceLoop1
+
+    vert:
+        li $t7, 0
+        li $t8, 8
 
     checkSpaceLoop1:
         addi $t7, $t7, 1        #move up one to start loop
@@ -371,6 +377,7 @@ checkSpace:
     preloop2:
         move $t3, $t1           #reset nextSpace
         move $t4, $a0           #reset index of nextSpace
+
         
     checkSpaceLoop2:
         addi $t7, $t7, -1        #move up one to start loop
