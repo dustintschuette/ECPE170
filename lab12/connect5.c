@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include<stdint.h>
+#include <stdint.h>
 //9x6 board
 char board[54];
 uint32_t m_z;
@@ -22,6 +22,7 @@ void printBoard(){
     printf(" _________________ \n|");
     for(int i = 0; i < 54; i++){
         printf("%c ", board[i]);
+
         if(i%9 == 8 && i != 53){
             printf("|\n|");
         }
@@ -35,14 +36,17 @@ void printBoard(){
 int checkSpace(int lastSpace, int dx){
     int nextSpace = lastSpace;
     char player = board[lastSpace];
+    int col = lastSpace % 9; //starting col to make sure it doesnt wrap
     //printf("Player: %c \n", player);
+    int nextCol = col + 1;
     int counter = 0;
-    while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player ){
+    while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player && nextCol < 9){
         counter++;
         nextSpace += dx;
     }
+    col = col -1;
     nextSpace = lastSpace - dx;
-    while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player ){
+    while(nextSpace > -1 && nextSpace < 54 && board[nextSpace] == player && col > -1){
         counter++;
         nextSpace -= dx;
     }
@@ -119,7 +123,7 @@ int takeTurnH(){
             printf("\n Please input hUmAn move: ");
             scanf("%u", &turn);
 
-            if(turn > 0 && turn < 9){
+            if(turn > 0 && turn < 8){
                 turn = checkMove(turn, 'H');
                 if(turn != 0){
                     gotInput = 1;
